@@ -106,6 +106,8 @@ namespace G1N_Font_Editor
                 var chars = checkBoxASCII.Checked ? 
                     textBoxCharsOpt.Text.ToCharArray().Concat(Utils.GetNonControlASCIICharacters()).ToArray() : 
                     textBoxCharsOpt.Text.ToCharArray();
+                var useSdf = checkBoxSdf.Checked;
+                var sdfSpread = (int)numericSdfSpread.Value;
                 Task.Run(() =>
                 {
                     try
@@ -113,7 +115,7 @@ namespace G1N_Font_Editor
                         var glyphTypeface = FontHelper.GetGlyphTypeface(Global.TTF_FONT_FAMILY_NAME, fontStyle);
                         var font = new Font(Global.TTF_FONT_FAMILY, fontSize, fontStyle);
                         var glyphTable = Global.G1N_FILE.GlyphTables.Find(table => table.Index == Global.SELECTED_G1N_FONT_ID);
-                        glyphTable.Build(glyphTypeface, font, chars);
+                        glyphTable.Build(glyphTypeface, font, chars, useSdf, sdfSpread);
                         handleUpdateProgressFromTask(Global.PROGRESS_MESSAGES["PreparingBMP"]);
                         var totalPage = glyphTable.CalculatePageCount();
                         handleReloadTablePage(glyphTable, null, totalPage);
@@ -1075,5 +1077,10 @@ namespace G1N_Font_Editor
         {
             
         }
+        private void checkBoxSdf_CheckedChanged(object sender, EventArgs e)
+        {
+            labelSdfSpread.Visible = checkBoxSdf.Checked;
+            numericSdfSpread.Visible = checkBoxSdf.Checked;
+        }    
     }
 }

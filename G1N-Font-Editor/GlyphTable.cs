@@ -119,7 +119,7 @@ namespace G1N_Font_Editor
             }
             return _tablePages.Count();
         }
-        public void Build(System.Windows.Media.GlyphTypeface glyphTypeface, Font font, char[] chars = null)
+        public void Build(System.Windows.Media.GlyphTypeface glyphTypeface, Font font, char[] chars = null, bool useSdf = false, int sdfSpread = 6)
         {
             if (chars != null)
             {
@@ -133,7 +133,7 @@ namespace G1N_Font_Editor
             }
             foreach (var glyph in Glyphs)
             {
-                glyph.Build(glyphTypeface, font);
+                glyph.Build(glyphTypeface, font, useSdf, sdfSpread);
             }
             Glyphs = Glyphs.OrderBy(g => g.Character).ToList();
         }

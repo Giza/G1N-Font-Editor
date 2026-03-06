@@ -99,6 +99,9 @@
             this.numericGotoPage = new System.Windows.Forms.NumericUpDown();
             this.buttonGotoPage = new System.Windows.Forms.Button();
             this.checkBox8Bpp = new System.Windows.Forms.CheckBox();
+            this.checkBoxSdf = new System.Windows.Forms.CheckBox();
+            this.labelSdfSpread = new System.Windows.Forms.Label();
+            this.numericSdfSpread = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOptPalette)).BeginInit();
             this.contextMenuSelectedGlyph.SuspendLayout();
@@ -109,6 +112,7 @@
             this.menuStrip.SuspendLayout();
             this.contextMenuGlyph.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericGotoPage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSdfSpread)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox
@@ -200,9 +204,53 @@
             this.labelOptFontSize.TabIndex = 61;
             this.labelOptFontSize.Text = "Size: ";
             // 
+            // checkBoxSdf
+            // 
+            this.checkBoxSdf.AutoSize = true;
+            this.checkBoxSdf.Location = new System.Drawing.Point(88, 275);
+            this.checkBoxSdf.Name = "checkBoxSdf";
+            this.checkBoxSdf.Size = new System.Drawing.Size(124, 17);
+            this.checkBoxSdf.TabIndex = 96;
+            this.checkBoxSdf.Text = "SDF (Distance Field)";
+            this.checkBoxSdf.UseVisualStyleBackColor = true;
+            this.checkBoxSdf.CheckedChanged += new System.EventHandler(this.checkBoxSdf_CheckedChanged);
+            // 
+            // labelSdfSpread
+            // 
+            this.labelSdfSpread.AutoSize = true;
+            this.labelSdfSpread.Location = new System.Drawing.Point(215, 276);
+            this.labelSdfSpread.Name = "labelSdfSpread";
+            this.labelSdfSpread.Size = new System.Drawing.Size(44, 13);
+            this.labelSdfSpread.TabIndex = 97;
+            this.labelSdfSpread.Text = "Spread:";
+            this.labelSdfSpread.Visible = false;
+            // 
+            // numericSdfSpread
+            // 
+            this.numericSdfSpread.Location = new System.Drawing.Point(265, 274);
+            this.numericSdfSpread.Maximum = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            this.numericSdfSpread.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numericSdfSpread.Name = "numericSdfSpread";
+            this.numericSdfSpread.Size = new System.Drawing.Size(64, 20);
+            this.numericSdfSpread.TabIndex = 98;
+            this.numericSdfSpread.Value = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
+            this.numericSdfSpread.Visible = false;
+            // 
             // buttonBuild
             // 
-            this.buttonBuild.Location = new System.Drawing.Point(12, 275);
+            this.buttonBuild.Location = new System.Drawing.Point(12, 300);
             this.buttonBuild.Name = "buttonBuild";
             this.buttonBuild.Size = new System.Drawing.Size(317, 25);
             this.buttonBuild.TabIndex = 65;
@@ -259,7 +307,7 @@
             // labelGlyphOpt
             // 
             this.labelGlyphOpt.AutoSize = true;
-            this.labelGlyphOpt.Location = new System.Drawing.Point(9, 315);
+            this.labelGlyphOpt.Location = new System.Drawing.Point(9, 340);
             this.labelGlyphOpt.Name = "labelGlyphOpt";
             this.labelGlyphOpt.Size = new System.Drawing.Size(73, 13);
             this.labelGlyphOpt.TabIndex = 71;
@@ -268,7 +316,7 @@
             // labelOptBaseline
             // 
             this.labelOptBaseline.AutoSize = true;
-            this.labelOptBaseline.Location = new System.Drawing.Point(9, 340);
+            this.labelOptBaseline.Location = new System.Drawing.Point(9, 365);
             this.labelOptBaseline.Name = "labelOptBaseline";
             this.labelOptBaseline.Size = new System.Drawing.Size(110, 13);
             this.labelOptBaseline.TabIndex = 72;
@@ -277,7 +325,7 @@
             // labelOptXOffset
             // 
             this.labelOptXOffset.AutoSize = true;
-            this.labelOptXOffset.Location = new System.Drawing.Point(9, 368);
+            this.labelOptXOffset.Location = new System.Drawing.Point(9, 393);
             this.labelOptXOffset.Name = "labelOptXOffset";
             this.labelOptXOffset.Size = new System.Drawing.Size(105, 13);
             this.labelOptXOffset.TabIndex = 74;
@@ -286,7 +334,7 @@
             // labelOptXAdv
             // 
             this.labelOptXAdv.AutoSize = true;
-            this.labelOptXAdv.Location = new System.Drawing.Point(9, 397);
+            this.labelOptXAdv.Location = new System.Drawing.Point(9, 422);
             this.labelOptXAdv.Name = "labelOptXAdv";
             this.labelOptXAdv.Size = new System.Drawing.Size(120, 13);
             this.labelOptXAdv.TabIndex = 76;
@@ -295,7 +343,7 @@
             // labelPalettes
             // 
             this.labelPalettes.AutoSize = true;
-            this.labelPalettes.Location = new System.Drawing.Point(12, 455);
+            this.labelPalettes.Location = new System.Drawing.Point(12, 480);
             this.labelPalettes.Name = "labelPalettes";
             this.labelPalettes.Size = new System.Drawing.Size(72, 13);
             this.labelPalettes.TabIndex = 78;
@@ -305,7 +353,7 @@
             // 
             this.pictureBoxOptPalette.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.pictureBoxOptPalette.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxOptPalette.Location = new System.Drawing.Point(12, 475);
+            this.pictureBoxOptPalette.Location = new System.Drawing.Point(12, 500);
             this.pictureBoxOptPalette.Name = "pictureBoxOptPalette";
             this.pictureBoxOptPalette.Size = new System.Drawing.Size(317, 50);
             this.pictureBoxOptPalette.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -396,7 +444,7 @@
             // 
             // numericOptCustomBaseline
             // 
-            this.numericOptCustomBaseline.Location = new System.Drawing.Point(166, 338);
+            this.numericOptCustomBaseline.Location = new System.Drawing.Point(166, 363);
             this.numericOptCustomBaseline.Maximum = new decimal(new int[] {
             127,
             0,
@@ -413,7 +461,7 @@
             // 
             // numericOptCustomXOffset
             // 
-            this.numericOptCustomXOffset.Location = new System.Drawing.Point(166, 366);
+            this.numericOptCustomXOffset.Location = new System.Drawing.Point(166, 391);
             this.numericOptCustomXOffset.Maximum = new decimal(new int[] {
             127,
             0,
@@ -430,7 +478,7 @@
             // 
             // numericOptCustomXAdv
             // 
-            this.numericOptCustomXAdv.Location = new System.Drawing.Point(166, 395);
+            this.numericOptCustomXAdv.Location = new System.Drawing.Point(166, 420);
             this.numericOptCustomXAdv.Maximum = new decimal(new int[] {
             127,
             0,
@@ -758,7 +806,7 @@
             // checkBox8Bpp
             // 
             this.checkBox8Bpp.AutoSize = true;
-            this.checkBox8Bpp.Location = new System.Drawing.Point(12, 425);
+            this.checkBox8Bpp.Location = new System.Drawing.Point(12, 450);
             this.checkBox8Bpp.Name = "checkBox8Bpp";
             this.checkBox8Bpp.Size = new System.Drawing.Size(86, 17);
             this.checkBox8Bpp.TabIndex = 95;
@@ -771,6 +819,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(864, 591);
+            this.Controls.Add(this.numericSdfSpread);
+            this.Controls.Add(this.labelSdfSpread);
+            this.Controls.Add(this.checkBoxSdf);
             this.Controls.Add(this.checkBox8Bpp);
             this.Controls.Add(this.buttonGotoPage);
             this.Controls.Add(this.numericGotoPage);
@@ -822,6 +873,7 @@
             this.menuStrip.PerformLayout();
             this.contextMenuGlyph.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericGotoPage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSdfSpread)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -899,6 +951,9 @@
         private System.Windows.Forms.NumericUpDown numericGotoPage;
         private System.Windows.Forms.Button buttonGotoPage;
         private System.Windows.Forms.CheckBox checkBox8Bpp;
+        private System.Windows.Forms.CheckBox checkBoxSdf;
+        private System.Windows.Forms.Label labelSdfSpread;
+        private System.Windows.Forms.NumericUpDown numericSdfSpread;
     }
 }
 

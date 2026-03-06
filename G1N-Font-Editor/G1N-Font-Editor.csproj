@@ -93,6 +93,7 @@
     <Compile Include="Glyph.cs" />
     <Compile Include="GlyphTable.cs" />
     <Compile Include="Helpers\Utils.cs" />
+    <Compile Include="Helpers\SdfGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Components\Singleton\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>

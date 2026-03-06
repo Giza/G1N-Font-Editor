@@ -92,7 +92,7 @@ namespace G1N_Font_Editor
             _pixelData = _is8Bpp ? ConvertBitmapToRaw8Bpp(_bmp) : Convert8BppTo4Bpp(_bmp);
             return _bmp;
         }
-        public byte[] Build(System.Windows.Media.GlyphTypeface glyphTypeface, Font font)
+        public byte[] Build(System.Windows.Media.GlyphTypeface glyphTypeface, Font font, bool useSdf = false, int sdfSpread = 6, int sdfUpscale = 4)
         {
             IDictionary<int, ushort> characterMap = glyphTypeface.CharacterToGlyphMap;
             ushort index;
@@ -102,6 +102,30 @@ namespace G1N_Font_Editor
                     throw new Exception(Global.MESSAGEBOX_MESSAGES["MissingChar"].Replace("{Character}", Character.ToString()));
                 return _pixelData;
             };
+
+            // SDF rendering path
+            if (useSdf)
+            {
+                var sdfResult = SdfGenerator.RenderGlyphSdf(Character, font, glyphTypeface, sdfSpread, sdfUpscale, _is8Bpp);
+                if (sdfResult == null)
+                {
+                    if (_pixelData == null)
+                        throw new Exception(Global.MESSAGEBOX_MESSAGES["MissingChar"].Replace("{Character}", Character.ToString()));
+                    return _pixelData;
+                }
+
+                _bmp = sdfResult.Bitmap;
+                Width = sdfResult.Width;
+                Height = sdfResult.Height;
+                XAdvance = sdfResult.XAdvance;
+                XOffset = sdfResult.XOffset;
+                Baseline = sdfResult.Baseline;
+                _pixelData = _is8Bpp ? sdfResult.PixelData : Convert8BppTo4Bpp(sdfResult.Bitmap);
+                Unk = (sbyte)((_pixelData.Length / Height) * -1);
+                return _pixelData;
+            }
+
+            // Standard bitmap rendering path (unchanged)
             var measureSize = FontHelper.MeasureSize(Character, font);
             int width = 
                 (int)Math.Ceiling(
